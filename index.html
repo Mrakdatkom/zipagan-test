@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="text-center">
+<body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-center">
     <h1 class="text-3xl font-bold underline text-red-700">
         Mark Ryan Zipagan
     </h1>
 
-    <button id="switch"
-        class="border-0 rounded-[10px] bg-black px-6 py-3 text-white transition-colors duration-1000 hover:bg-[pink] hover:text-black">Switch</button>
+    <button class="btn-primary">Send Message</button>
+
+    <button id="darkModeToggle" class="px-4 py-2 border rounded">Toggle Dark Mode</button>
     <header>
         <nav class="mx-[50px] flex items-center justify-between max-[600px]:flex-col max-[600px]:gap-[15px]">
             <span>@hxsdmark</span>
@@ -41,7 +45,7 @@
                 </section>
 
                 <section id="services"
-                    class="min-w-[280px] flex-1 border-2 border-black bg-red-600 p-5 max-[600px]:min-w-0 max-[600px]:flex-[1_1_100%] max-[600px]:p-[15px]">
+                    class="px-12 py-6 border border-gray-300 dark:border-slate-700 dark:bg-slate-800">
                     <h2 class="text-xl text-[hotpink] max-[768px]:text-[48px] max-[768px]:text-blue-600">My Services
                     </h2>
                     <p>Website Creation, System Creation, AI Automation, Database Management, Project Management,
@@ -75,7 +79,15 @@
                 </section>
             </main>
 
-            <!-- <script src="script.js"></script> -->
+        </section>
+        <script>
+            const darkModeToggle = document.querySelector('#darkModeToggle');
+            const html = document.querySelector("html");
+
+            darkModeToggle.addEventListener("click", function () {
+                html.classList.toggle("dark");
+            });
+        </script>
 </body>
 
 </html>
