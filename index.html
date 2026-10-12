@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
         @custom-variant dark (&:where(.dark, .dark *));
+
+        @layer components {
+            .btn-primary {
+                @apply px-6 py-3 bg-red-800 text-white hover:bg-orange-400 transition-colors dark:bg-slate-700;
+            }
+        }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-center">
@@ -18,9 +24,9 @@
 
     <button class="btn-primary">Send Message</button>
 
-    <button id="darkModeToggle" class="px-4 py-2 border rounded">Toggle Dark Mode</button>
+    <button id="darkModeToggle" class="btn-primary px-4 py-2 border rounded">Toggle Dark Mode</button>
     <header>
-        <nav class="mx-[50px] flex items-center justify-between max-[600px]:flex-col max-[600px]:gap-[15px]">
+        <nav class="mx-12.5 flex items-center justify-between max-[600px]:flex-col max-[600px]:gap-[15px]">
             <span>@hxsdmark</span>
             <ul class="m-0 flex list-none gap-5 p-0 max-[600px]:flex-col max-[600px]:text-center">
                 <li><a class="transition-colors duration-500 hover:text-[pink]" href="#projects">Projects</a></li>
@@ -81,7 +87,7 @@
 
         </section>
         <script>
-            const darkModeToggle = document.querySelector('#darkModeToggle');
+            const darkModeToggle = document.querySelector("#darkModeToggle");
             const html = document.querySelector("html");
 
             darkModeToggle.addEventListener("click", function () {
