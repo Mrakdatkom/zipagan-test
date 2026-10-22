@@ -35,28 +35,25 @@
         </nav>
     </header>
 
-    <main
-        class="m-[50px] flex flex-wrap gap-[30px] p-[50px] max-[600px]:m-[10px] max-[600px]:gap-5 max-[600px]:p-[15px]">
-        <section id="projects"
-            class="min-w-[280px] flex-1 border-2 border-black bg-orange-500 p-5 max-[600px]:min-w-0 max-[600px]:flex-[1_1_100%] max-[600px]:p-[15px]">
-            <h2 class="text-xl text-[hotpink] max-[768px]:text-[48px] max-[768px]:text-blue-600">My Projects
+    <main class="flex flex-col gap-24 px-6 py-16 md:px-12">
+        <section id="projects" class="reveal min-h-[60vh]">
+            <h2 class="text-xl text-[hotpink] md:text-[48px] md:text-blue-600">My Projects
             </h2>
             <p>Personal portfolio, payroll system, company website, startup website, and compliance monitoring
                 system.
             </p>
         </section>
 
-        <section id="services" class="px-12 py-6 border border-gray-300 dark:border-slate-700 dark:bg-slate-800">
-            <h2 class="text-xl text-[hotpink] max-[768px]:text-[48px] max-[768px]:text-blue-600">My Services
+        <section id="services" class="reveal min-h-[60vh]">
+            <h2 class="text-xl text-[hotpink] md:text-[48px] md:text-blue-600">My Services
             </h2>
             <p>Website Creation, System Creation, AI Automation, Database Management, Project Management,
                 Systems
                 Analyst</p>
         </section>
 
-        <section id="contact"
-            class="min-w-[280px] flex-1 border-2 border-black p-5 max-[600px]:min-w-0 max-[600px]:flex-[1_1_100%] max-[600px]:p-[15px]">
-            <h2 class="text-xl text-[hotpink] max-[768px]:text-[48px] max-[768px]:text-blue-600">Let's build
+        <section id="contact" class="reveal min-h-[60vh]">
+            <h2 class="text-xl text-[hotpink] md:text-[48px] md:text-blue-600">Let's build
                 together!
             </h2>
             <form class="flex flex-col gap-5" action="#">
@@ -81,37 +78,14 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script>
-        console.log("GSAP Version: ", gsap.version);
-        // 1. gsap.to(), gsap.from(), gsap.fromTo()
-        // gsap.to("h1", { x: -200, duration: 10 });
-        // gsap.to("h1", { rotation: 360, duration: 1 });
-        // gsap.to("h1", { opacity: 0.3, duration: 1 });
-        // gsap.to("h1", { scale: 3, duration: 1 });
-        // gsap.to("h1", { backgroundColor: "green", duration: 1 });
-
-        // from: start at these values, animate to wherever it normally sits
-        // gsap.from("h1", { y: -60, opacity: 0, duration: 1 });
-
-        // fromTo: you control both the start AND the end
-        // gsap.fromTo("h1", { opacity: 0, }, { opacity: 1, duration: 3 });
-
-        // 2. EASING
-        // gsap.from("h1", { y: -60, opacity: 0, duration: 1, ease: "power2.out" });
-        // gsap.from("h1", { y: -60, opacity: 0, duration: 1, ease: "back.out(2.7)" });
-        // gsap.from("h1", { y: -60, opacity: 0, duration: 1.5, ease: "bounce.out" });
-        // gsap.from("h1", { y: -60, opacity: 0, duration: 1.5, ease: "elastic.out(1, 0.4)" });
-
-        // 3. STAGGER
-        // gsap.from("nav a", { y: -20, opacity: 0, duration: 0.6, ease: "power2.out", stagger: 0.5 });
-
         // 4. TIMELINE
         const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "power2.out" } });
 
         // 4.1.POSITION PARAMETER
         tl.from("h1", { y: -40, opacity: 0 })
             .from("nav a", { y: -20, opacity: 0, stagger: 0.15 }, "-=0.4")
-            .from("main section", { y: 40, opacity: 0, stagger: 0.2 }, "<0.3");
 
         // 4.2. CONTROLLING TIMELINE
         const replayBtn = document.querySelector("#replayBtn");
@@ -120,14 +94,24 @@
             tl.restart();
         });
 
-        // const mm = gsap.matchMedia();
+        gsap.registerPlugin(ScrollTrigger);
 
-        // mm.add("(prefers-reduced-motion: no-preference)", function () {
-        //     const tl = gsap.timeline({ defaults: { duration: 0.8, ease: "power2.out" } });
-        //     tl.from("h1", { y: -40, opacity: 0 })
-        //         .from("nav a", { y: -20, opacity: 0, stagger: 0.15 }, "-=0.4")
-        //         .from("main section", { y: 40, opacity: 0, stagger: 0.2 }, "<0.3");
-        // });
+        const reveals = gsap.utils.toArray(".reveal");
+
+        reveals.forEach(function (el) {
+            gsap.from(el, {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 80%",
+                    markers: true,
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
     </script>
     <script>
         const darkModeToggle = document.querySelector("#darkModeToggle");
